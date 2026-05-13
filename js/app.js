@@ -51,8 +51,16 @@ function populateTalentFeed() {
     const tableBody = document.getElementById("talentBody");
     tableBody.innerHTML = "";
 
-    talentPool.sort((a, b) => b.trustScore - a.trustScore).forEach(candidate => {
+    talentPool.sort((a, b) => b.trustScore - a.trustScore).forEach((candidate, index) => {
         const row = tableBody.insertRow();
+        row.style.opacity = "0";
+        row.style.transform = "translateY(10px)";
+        row.style.transition = `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`;
+
+        setTimeout(() => {
+            row.style.opacity = "1";
+            row.style.transform = "translateY(0)";
+        }, 10);
 
         // Candidate Column
         const cellInfo = row.insertCell(0);
